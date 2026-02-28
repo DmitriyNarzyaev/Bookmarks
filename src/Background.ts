@@ -1,7 +1,7 @@
 import Container = PIXI.Container;
 import "pixi.js";
+import Bookmark_Text from "./Bookmark_Text";
 import Global from "./Global";
-import {TextStyle} from "pixi.js";
 
 export default class Background extends Container {
     private _background:PIXI.Graphics;
@@ -26,16 +26,9 @@ export default class Background extends Container {
     }
 
     private title():void {
-        let textStyle:TextStyle = new PIXI.TextStyle ({
-            fontFamily: 'times new roman',
-            fontSize: 60,
-            fill: [0x123321],
-            align: 'center'
-        });
-
-        let contentText:PIXI.Text = new PIXI.Text ("BOOKMARKS", textStyle);
-        contentText.x = (Global.WINDOW_WIDTH - contentText.width) / 2;
-        contentText.y = Global.GAP * 1.5;
-        this.addChild(contentText);
+        let title:Bookmark_Text = new Bookmark_Text(60, "BOOKMARKS", 0x123321 );
+        title.x = (Global.WINDOW_WIDTH - title.width) / 2;
+        title.y = Global.GAP * 1.5;
+        this.addChild(title);
     }
 }
