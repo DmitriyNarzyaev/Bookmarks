@@ -21,11 +21,20 @@ export default class Main_Container extends Container {
 		Main_Container.JSON_LOADER.open("GET", "base.json", true);
 		Main_Container.JSON_LOADER.onreadystatechange = () => {
 			this._level = Main_Container.JSON_LOADER.response;
-			this.createBackground();
-			this.createBookmarks();
+			this.pictureLoader();
 		};
 		Main_Container.JSON_LOADER.send();
+	}
 
+	private pictureLoader():void {
+		const loader:PIXI.Loader = new PIXI.Loader();
+		loader
+			.add("google", this._level.items[1].name)			//0
+			.add("youtube", this._level.items[1].name)
+		loader.load(()=> {
+			this.createBackground();
+			this.createBookmarks();
+		});
 	}
 
 	private createBackground():void {
