@@ -7,11 +7,11 @@ export default class Bookmark extends Container {
     private _backgroundHeight:number = 200
     private readonly _callback:()=>void;
 
-    constructor(spriteName:string, callback:()=>void = null) {
+    constructor(spriteNumber:number, callback:()=>void = null) {
         super();
         this._callback = callback;
         this.bookmarkBackground();
-        this.createImage(spriteName);
+        this.createImage(spriteNumber);
         this.interactive = true;
         this.buttonMode = true;
         if (callback) {
@@ -27,9 +27,15 @@ export default class Bookmark extends Container {
         this.addChild(background);
     }
 
-    private createImage(spriteName:string):void {
-        let background:PIXI.Sprite = Sprite.from(spriteName);
-        this.addChild(background);
+    private createImage(spriteNumber:number):void {
+        let textureX:number = spriteNumber * 350;
+        let textureY:number = 0;
+        let textureWidth:number = 350;
+        let textureHeight:number = 200;
+        let mapTexture:any = new PIXI.Texture(PIXI.utils.TextureCache["mapLogo"]);
+        mapTexture.frame = new PIXI.Rectangle(textureX, textureY, textureWidth, textureHeight);
+        let image:PIXI.Sprite = new PIXI.Sprite(mapTexture);
+        this.addChild(image);
     }
 
     private pointerTabHandler():void {

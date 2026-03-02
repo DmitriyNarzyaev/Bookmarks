@@ -21,7 +21,9 @@ export default class Main_Container extends Container {
 		Main_Container.JSON_LOADER.open("GET", "base.json", true);
 		Main_Container.JSON_LOADER.onreadystatechange = () => {
 			this._level = Main_Container.JSON_LOADER.response;
-			this.pictureLoader();
+			if (this._level != null) {
+				this.pictureLoader();
+			}
 		};
 		Main_Container.JSON_LOADER.send();
 	}
@@ -29,8 +31,7 @@ export default class Main_Container extends Container {
 	private pictureLoader():void {
 		const loader:PIXI.Loader = new PIXI.Loader();
 		loader
-			.add("google", this._level.items[1].name)			//0
-			.add("youtube", this._level.items[1].name)
+			.add("mapLogo", "MapLogo.jpg")
 		loader.load(()=> {
 			this.createBackground();
 			this.createBookmarks();
@@ -54,7 +55,8 @@ export default class Main_Container extends Container {
 		if (this._level != null) {
 			for (let iterator:number = 0; iterator < this._level.items.length; iterator++) {
 				let bookmark:Bookmark = new Bookmark(
-					this._level.items[iterator].name,
+					//this._level.items[iterator].name,
+					iterator,
 					()=>{this.buttonClick(this._level.items[iterator].link);});
 				this._bookmarkContainer.addChild(bookmark);
 				bookmark.x = bookmarkX;
