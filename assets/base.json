@@ -1,11 +1,35 @@
 {
 	"items":[
 		{
-			"name":"google.jpg",
-			"link":"https://google.com"
+			"name":"google",
+			"link":"https://google.com",
+			"mapX":0,
+			"mapY":0
 		}, {
-			"name":"youtube.jpg",
-			"link":"https://youtube.com/"
+			"name":"youtube",
+			"link":"https://youtube.com/",
+			"mapX":350,
+			"mapY":0
+		}, {
+			"name":"password manager",
+			"link":"https://dmitriynarzyaev.github.io/Storage-Pas/",
+			"mapX":700,
+			"mapY":0
+		}, {
+			"name":"pikabu",
+			"link":"https://pikabu.ru/",
+			"mapX":1050,
+			"mapY":0
+		}, {
+			"name":"anilibria",
+			"link":"https://anilibria.top/",
+			"mapX":0,
+			"mapY":200
+		}, {
+			"name":"citilink serials",
+			"link":"https://serial.karelia.pro/",
+			"mapX":350,
+			"mapY":200
 		}
 	]
 }
