@@ -36,7 +36,7 @@ export default class Bookmark_Grid extends Container {
                 bookmark.y = bookmarkY;
                 bookmarkX += bookmark.width + Global.GAP;
 
-                if (bookmarkX + bookmark.width > Global.WINDOW_WIDTH) {
+                if (bookmarkX + bookmark.width > Global.WINDOW_WIDTH - Global.GAP*3) {
                     bookmarkX = 0;
                     bookmarkY += bookmark.height + Global.GAP;
 
