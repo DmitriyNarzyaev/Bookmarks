@@ -30,6 +30,16 @@
 			"link":"https://serial.karelia.pro/",
 			"mapX":350,
 			"mapY":200
+		}, {
+			"name":"vk",
+			"link":"https://vk.com/",
+			"mapX":700,
+			"mapY":200
+		}, {
+			"name":"leonardo",
+			"link":"https://leonardo.ai/",
+			"mapX":1050,
+			"mapY":200
 		}
 	]
 }
