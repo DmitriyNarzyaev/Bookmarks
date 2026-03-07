@@ -13,12 +13,12 @@ export default class Bookmark_Grid extends Container {
         }
 
         private createBookmarks():void {
-        let bookmarkX: number = 0;
-        let bookmarkY: number = 0;
-        let colorRed: string = "10";
-        let colorGreen: string = "50";
-        let colorBlue: string = "90";
-        let changeColorStep: number = 15
+        let bookmarkX:number = 0;
+        let bookmarkY:number = 0;
+        let colorRed:string = "20";
+        let colorGreen:string = "50";
+        let colorBlue:string = "80";
+        let changeColorStep:number = 20;
 
         if (this._level != null) {
             for (let iterator: number = 0; iterator < this._level.items.length; iterator++) {
@@ -47,6 +47,14 @@ export default class Bookmark_Grid extends Container {
                     let testcolorRed = Math.abs(Number(colorRed));
                     let changeRed: number = testcolorRed += changeColorStep;
                     colorRed = changeRed as any as string;
+
+                    if (colorBlue == "80") {
+                        changeColorStep = 20
+                    } else if (colorBlue == "20") {
+                        changeColorStep = -20
+                    }
+
+                    console.log(changeColorStep)
                 }
             }
         }
