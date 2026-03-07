@@ -47,5 +47,16 @@ export default class Main_Container extends Container {
 		this._bookmarkGrid.x = (Global.WINDOW_WIDTH - this._bookmarkGrid.width) / 2;
 		this._bookmarkGrid.y = Global.GAP * 5;
 		this.addChild(this._bookmarkGrid);
+
+		let maskX:number = this._background.x;
+		let maskY:number = this._background.y;
+		let maskWidth:number = Global.WINDOW_WIDTH;
+		let maskHeight:number = this._background.height + 17;
+		let bookmarkGridMask:PIXI.Graphics = new PIXI.Graphics
+		bookmarkGridMask
+			.beginFill(0xffffff)
+			.drawRect(maskX, maskY, maskWidth, maskHeight);
+		this.addChild(bookmarkGridMask);
+		this._bookmarkGrid.mask = bookmarkGridMask;
 	}
 }

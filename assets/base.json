@@ -40,6 +40,21 @@
 			"link":"https://leonardo.ai/",
 			"mapX":1050,
 			"mapY":200
+		}, {
+			"name":"Github",
+			"link":"https://github.com/",
+			"mapX":0,
+			"mapY":400
+		}, {
+			"name":"Trello",
+			"link":"https://trello.com/",
+			"mapX":350,
+			"mapY":400
+		}, {
+			"name":"Reddit",
+			"link":"https://www.reddit.com/",
+			"mapX":700,
+			"mapY":400
 		}
 	]
 }
