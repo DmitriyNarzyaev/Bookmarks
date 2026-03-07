@@ -9,6 +9,8 @@ export default class Main_Container extends Container {
 	private _level:ILevel;
 	private _background:Background;
 	private _bookmarkGrid:Bookmark_Grid;
+	private _wheelHandler:()=>void;
+
 	constructor() {
 		super();
 		this.jsonLoader();
@@ -34,6 +36,9 @@ export default class Main_Container extends Container {
 		loader.load(()=> {
 			this.createBackground();
 			this.createBookmarks();
+			if (this._bookmarkGrid.height > this._background.height) {
+				this._wheelHandler = Main_Container.addEvent(document, "wheel", this.movingContentForWheel.bind(this));
+			}
 		});
 	}
 
@@ -48,15 +53,45 @@ export default class Main_Container extends Container {
 		this._bookmarkGrid.y = Global.GAP * 5;
 		this.addChild(this._bookmarkGrid);
 
-		let maskX:number = this._background.x;
-		let maskY:number = this._background.y;
+		let lineWidthCorrection:number = 1;
+		let maskX:number = 0;
+		let maskY:number = Global.GAP + lineWidthCorrection;																				//2 = background line width
 		let maskWidth:number = Global.WINDOW_WIDTH;
-		let maskHeight:number = this._background.height + 17;
+		let maskHeight:number = Global.WINDOW_HEIGHT - Global.GAP * 2 - lineWidthCorrection * 2;
 		let bookmarkGridMask:PIXI.Graphics = new PIXI.Graphics
 		bookmarkGridMask
 			.beginFill(0xffffff)
 			.drawRect(maskX, maskY, maskWidth, maskHeight);
 		this.addChild(bookmarkGridMask);
 		this._bookmarkGrid.mask = bookmarkGridMask;
+	}
+
+	private movingContentForWheel(wheelEvent:WheelEvent):void {															//wheel event
+		const delta:number = 30 * (wheelEvent.deltaY > 0 ? 1 : -1);
+		if (wheelEvent.deltaY > 0){
+			this._bookmarkGrid.y -= Math.abs(delta);
+		} else {
+			this._bookmarkGrid.y += Math.abs(delta);
+		}
+		this.dragLimits();
+	}
+
+	private static addEvent(object:any, type:string, callback:() => void):() => void {									//wheel event
+		if (object.addEventListener) {
+			object.addEventListener(type, callback, false);
+		} else if (object.attachEvent) {
+			object.attachEvent("on" + type, callback);
+		} else {
+			object["on" + type] = callback;
+		}
+		return callback;
+	}
+
+	private dragLimits():void {
+		if (this._bookmarkGrid.y <= Global.WINDOW_HEIGHT - this._bookmarkGrid.height - Global.GAP) {
+			this._bookmarkGrid.y = Global.WINDOW_HEIGHT - this._bookmarkGrid.height - Global.GAP;
+		} else if (this._bookmarkGrid.y >= Global.GAP*5) {
+			this._bookmarkGrid.y = Global.GAP*5;
+		}
 	}
 }
