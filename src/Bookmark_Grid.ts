@@ -23,7 +23,6 @@ export default class Bookmark_Grid extends Container {
         if (this._level != null) {
             for (let iterator: number = 0; iterator < this._level.items.length; iterator++) {
                 let bgColor: string = colorRed + colorGreen + colorBlue;
-                console.log("color = " + bgColor);
                 let bookmark: Bookmark = new Bookmark(
                     this._level.items[iterator].mapX,
                     this._level.items[iterator].mapY,
@@ -53,8 +52,6 @@ export default class Bookmark_Grid extends Container {
                     } else if (colorBlue == "20") {
                         changeColorStep = -20
                     }
-
-                    console.log(changeColorStep)
                 }
             }
         }
