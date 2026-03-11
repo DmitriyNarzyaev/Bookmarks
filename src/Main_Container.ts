@@ -66,6 +66,7 @@ export default class Main_Container extends Container {
 		let maskWidth:number = Global.WINDOW_WIDTH;
 		let maskHeight:number = Global.WINDOW_HEIGHT - Global.GAP * 7 + lineWidthCorrection*2;
 		let bookmarkGridMask:PIXI.Graphics = new PIXI.Graphics
+
 		bookmarkGridMask
 			.beginFill(0xffffff)
 			.drawRect(maskX, maskY, maskWidth, maskHeight);

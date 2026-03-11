@@ -35,6 +35,12 @@ export default class Bookmark_Grid extends Container {
                 bookmark.y = bookmarkY;
                 bookmarkX += bookmark.width + Global.GAP;
 
+                if (Global.WINDOW_WIDTH - Global.GAP*4 < bookmark.width) {
+                    let oldWidth:number = bookmark.width;
+                    bookmark.width = Global.WINDOW_WIDTH - Global.GAP*4
+                    bookmark.height = bookmark.height / (oldWidth / bookmark.width);
+                }
+
                 if (bookmarkX + bookmark.width > Global.WINDOW_WIDTH - Global.GAP*3) {
                     bookmarkX = 0;
                     bookmarkY += bookmark.height + Global.GAP;
