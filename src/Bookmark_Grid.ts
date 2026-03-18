@@ -4,11 +4,14 @@ import Container = PIXI.Container;
 import "pixi.js";
 
 export default class Bookmark_Grid extends Container {
+    public background:PIXI.Graphics;
     private _level:ILevel;
 
     constructor(level:ILevel) {
         super();
             this._level = level;
+            this.interactive = true;
+            this.buttonMode = true;
             this.createBookmarks();
         }
 
@@ -19,6 +22,13 @@ export default class Bookmark_Grid extends Container {
         let colorGreen:string = "50";
         let colorBlue:string = "80";
         let changeColorStep:number = 20;
+
+        this.background = new PIXI.Graphics;
+        this.background
+            //.beginFill(0x226699, 1)
+            .beginFill(0x000000, 1)
+            .drawRect(0, 0, 10, 10);
+        this.addChild(this.background);
 
         if (this._level != null) {
             for (let iterator: number = 0; iterator < this._level.items.length; iterator++) {
@@ -61,6 +71,10 @@ export default class Bookmark_Grid extends Container {
                 }
             }
         }
+            this.background.x = -1;
+            this.background.y = -1;
+            this.background.width = this.width;
+            this.background.height = this.height;
     }
 
     private buttonClick(link:string):void {

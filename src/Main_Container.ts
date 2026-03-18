@@ -42,6 +42,7 @@ export default class Main_Container extends Container {
 			if (this._bookmarkGrid.height > this._background.height) {
 				this._wheelHandler = Main_Container.addEvent(document, "wheel", this.movingContentForWheel.bind(this));
 				this.createScrollbar();
+
 				this._scrollbar.thumb.addListener('pointerdown', this.scrollbarPointerdown, this);
 				this._scrollbar.thumb.addListener('pointerup', this.scrollbarPointerup, this);
 				this._scrollbar.thumb.addListener('pointerupoutside', this.scrollbarPointerup, this);
@@ -117,7 +118,7 @@ export default class Main_Container extends Container {
 
 	private scrollbarOnDragMove(event:InteractionEvent):void {
 		const newPosition:IPoint = event.data.getLocalPosition(this._scrollbar);
-		this._scrollbar.thumb.y = newPosition.y -  this._scrollbarTouchDownY;
+		this._scrollbar.thumb.y = newPosition.y - this._scrollbarTouchDownY;
 		this.bookmarkGridMoving();
 		this.dragLimits();
 	}

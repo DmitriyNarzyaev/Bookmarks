@@ -5,7 +5,7 @@ export default class Scrollbar extends Container {
     public thumb :PIXI.Graphics;
     private _track:PIXI.Graphics;
     private readonly _trackHeight:number = Global.WINDOW_HEIGHT;
-    private readonly _scrollbarWidth:number = Global.GAP/2;
+    private readonly _scrollbarWidth:number = Global.GAP - 2;
     private readonly _thumbHeight:number;
 
     constructor(thumbHeight:number){
@@ -18,9 +18,8 @@ export default class Scrollbar extends Container {
     private createTrack():void {
         this._track = new PIXI.Graphics;
         this._track
-            .lineStyle(1, 0x004477, 1, 0)
             .beginFill(0x005577, .5)
-            .drawRect(0, 0, this._scrollbarWidth, this._trackHeight);
+            .drawRoundedRect(0, 0, this._scrollbarWidth, this._trackHeight, this._scrollbarWidth/2);
         this.addChild(this._track);
     }
 
@@ -29,7 +28,7 @@ export default class Scrollbar extends Container {
         this.thumb
             .lineStyle(1, 0x004477, 1, 0)
             .beginFill(0x226699)
-            .drawRect(0, 0, this._scrollbarWidth, this._thumbHeight);
+            .drawRoundedRect(0, 0, this._scrollbarWidth, this._thumbHeight, this._scrollbarWidth/2);
         this.thumb.interactive = true;
         this.thumb.buttonMode = true;
         this.addChild(this.thumb);
