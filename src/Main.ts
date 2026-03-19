@@ -5,7 +5,7 @@ import MainContainer from "./Main_Container";
 import Global from "./Global";
 
 export class Main extends Container {
-	public static BORDER_SIZE:number = 200;
+	public static JSON_LOADER:XMLHttpRequest;
 	private _size:Rectangle;
 	private _mainContainer:MainContainer;
 
@@ -13,7 +13,28 @@ export class Main extends Container {
 		super();
 		this.initSize();
 		this.initPixiApp(canvasId);
-		this.startOfTheProgram();
+		this.jsonLoader();
+	}
+
+	private jsonLoader():void {
+		Main.JSON_LOADER = new XMLHttpRequest();
+		Main.JSON_LOADER.responseType = "json";
+		Main.JSON_LOADER.open("GET", "base.json", true);
+		Main.JSON_LOADER.onreadystatechange = () => {
+			if (Main.JSON_LOADER.response != null) {
+				this.pictureLoader();
+			}
+		};
+		Main.JSON_LOADER.send();
+	}
+
+	private pictureLoader():void {
+		const loader:PIXI.Loader = new PIXI.Loader();
+		loader
+			.add("mapOfLogo", "MapOfLogo.png")
+		loader.load(()=> {
+			this.startOfTheProgram();
+		});
 	}
 
 	private startOfTheProgram():void {
@@ -38,7 +59,7 @@ export class Main extends Container {
 	}
 
 	private initMainContainer():void {
-		this._mainContainer = new MainContainer();
+		this._mainContainer = new MainContainer(Main.JSON_LOADER);
 		this._mainContainer.width = window.innerWidth;
 		this._mainContainer.height = window.innerHeight;
 		Global.PIXI_APP.stage.addChild(this._mainContainer);

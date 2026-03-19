@@ -11,7 +11,6 @@ export default class Bookmark_Grid extends Container {
         super();
             this._level = level;
             this.interactive = true;
-            this.buttonMode = true;
             this.createBookmarks();
         }
 
@@ -25,8 +24,7 @@ export default class Bookmark_Grid extends Container {
 
         this.background = new PIXI.Graphics;
         this.background
-            //.beginFill(0x226699, 1)
-            .beginFill(0x000000, 1)
+            .beginFill(0x226699, 1)
             .drawRect(0, 0, 10, 10);
         this.addChild(this.background);
 

@@ -4,50 +4,34 @@ import Background from "./Background";
 import Scrollbar from "./Scrollbar";
 import Global from "./Global";
 import { InteractionEvent, IPoint } from "pixi.js";
+import { Main } from "./Main";
 
 export default class Main_Container extends Container {
-	public static JSON_LOADER:XMLHttpRequest;
 	private _level:ILevel;
+	private _wheelHandler:()=>void;
 	private _background:Background;
 	private _bookmarkGrid:Bookmark_Grid;
 	private _scrollbar:Scrollbar;
-	private _wheelHandler:()=>void;
 	private _scrollbarTouchDownY:number;
 
-	constructor() {
+	constructor(jsonLoader:XMLHttpRequest) {
 		super();
-		this.jsonLoader();
+		this._level = jsonLoader.response;
+		this.startAll();
 	}
 
-	private jsonLoader():void {
-		Main_Container.JSON_LOADER = new XMLHttpRequest();
-		Main_Container.JSON_LOADER.responseType = "json";
-		Main_Container.JSON_LOADER.open("GET", "base.json", true);
-		Main_Container.JSON_LOADER.onreadystatechange = () => {
-			this._level = Main_Container.JSON_LOADER.response;
-			if (this._level != null) {
-				this.pictureLoader();
-			}
-		};
-		Main_Container.JSON_LOADER.send();
-	}
+	private startAll():void {
+		this.createBackground();
+		this.createBookmarks();
 
-	private pictureLoader():void {
-		const loader:PIXI.Loader = new PIXI.Loader();
-		loader
-			.add("mapOfLogo", "MapOfLogo.png")
-		loader.load(()=> {
-			this.createBackground();
-			this.createBookmarks();
-			if (this._bookmarkGrid.height > this._background.height) {
-				this._wheelHandler = Main_Container.addEvent(document, "wheel", this.movingContentForWheel.bind(this));
-				this.createScrollbar();
+		if (this._bookmarkGrid.height > this._background.height) {
+			this._wheelHandler = Main_Container.addEvent(document, "wheel", this.movingContentForWheel.bind(this));
+			this.createScrollbar();
 
-				this._scrollbar.thumb.addListener('pointerdown', this.scrollbarPointerdown, this);
-				this._scrollbar.thumb.addListener('pointerup', this.scrollbarPointerup, this);
-				this._scrollbar.thumb.addListener('pointerupoutside', this.scrollbarPointerup, this);
-			}
-		});
+			this._scrollbar.thumb.addListener('pointerdown', this.scrollbarPointerdown, this);
+			this._scrollbar.thumb.addListener('pointerup', this.scrollbarPointerup, this);
+			this._scrollbar.thumb.addListener('pointerupoutside', this.scrollbarPointerup, this);
+		}
 	}
 
 	private createBackground():void {
@@ -56,14 +40,14 @@ export default class Main_Container extends Container {
 	}
 
 	private createBookmarks():void {
-		this._bookmarkGrid = new Bookmark_Grid(Main_Container.JSON_LOADER.response);
+		this._bookmarkGrid = new Bookmark_Grid(Main.JSON_LOADER.response);
 		this._bookmarkGrid.x = (Global.WINDOW_WIDTH - this._bookmarkGrid.width) / 2;
 		this._bookmarkGrid.y = Global.GAP * 5;
 		this.addChild(this._bookmarkGrid);
 
 		let lineWidthCorrection:number = 1;
-		let maskX:number = 0;															//2 = background line width
-		let maskY:number = Global.GAP * 5 - lineWidthCorrection;															//2 = background line width
+		let maskX:number = 0;
+		let maskY:number = Global.GAP * 5 - lineWidthCorrection;
 		let maskWidth:number = Global.WINDOW_WIDTH;
 		let maskHeight:number = Global.WINDOW_HEIGHT - Global.GAP * 7 + lineWidthCorrection*2;
 		let bookmarkGridMask:PIXI.Graphics = new PIXI.Graphics
