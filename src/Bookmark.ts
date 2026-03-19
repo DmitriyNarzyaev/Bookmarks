@@ -20,7 +20,7 @@ export default class Bookmark extends Container {
 
     private bookmarkBackground(bgColor:number):void {
         let background:PIXI.Graphics = new PIXI.Graphics;
-        background.lineStyle(2, 0xffffff);
+        background.lineStyle(1, 0x123321);
         background.beginFill(bgColor);
         background.drawRect(0, 0, this._backgroundWidth, this._backgroundHeight);
         this.addChild(background);

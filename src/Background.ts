@@ -28,7 +28,7 @@ export default class Background extends Container {
     private title():void {
         let textSize:number;
         Global.WINDOW_WIDTH > Global.WINDOW_HEIGHT ? textSize = 60 : textSize = Global.WINDOW_WIDTH/15;
-        let title:Bookmark_Text = new Bookmark_Text(textSize, "BOOKMARKS", 0x123321 );
+        let title:Bookmark_Text = new Bookmark_Text(textSize, "BOOKMARKS", 0x123321);
 
         title.x = (Global.WINDOW_WIDTH - title.width) / 2;
         title.y = Global.GAP * 1.5;

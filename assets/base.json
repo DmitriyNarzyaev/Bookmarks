@@ -55,6 +55,21 @@
 			"link":"https://www.reddit.com/",
 			"mapX":700,
 			"mapY":400
+		}, {
+			"name":"Cmetnik",
+			"link":"https://cmetnik.ru/",
+			"mapX":1050,
+			"mapY":400
+		}, {
+			"name":"Wildberries",
+			"link":"https://www.wildberries.ru/",
+			"mapX":0,
+			"mapY":600
+		}, {
+			"name":"Ya",
+			"link":"https://ya.ru/",
+			"mapX":350,
+			"mapY":600
 		}
 	]
 }
