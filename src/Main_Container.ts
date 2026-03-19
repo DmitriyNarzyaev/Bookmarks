@@ -14,9 +14,9 @@ export default class Main_Container extends Container {
 	private _scrollbar:Scrollbar;
 	private _scrollbarTouchDownY:number;
 
-	constructor(jsonLoader:XMLHttpRequest) {
+	constructor() {
 		super();
-		this._level = jsonLoader.response;
+		this._level = Global.JSON_LOADER.response;
 		this.startAll();
 	}
 
@@ -40,7 +40,7 @@ export default class Main_Container extends Container {
 	}
 
 	private createBookmarks():void {
-		this._bookmarkGrid = new Bookmark_Grid(Main.JSON_LOADER.response);
+		this._bookmarkGrid = new Bookmark_Grid(Global.JSON_LOADER.response);
 		this._bookmarkGrid.x = (Global.WINDOW_WIDTH - this._bookmarkGrid.width) / 2;
 		this._bookmarkGrid.y = Global.GAP * 5;
 		this.addChild(this._bookmarkGrid);
